@@ -1,15 +1,9 @@
 from PIL import Image
-import pytesseract as pt
-import re
+import pytesseract
+import numpy as np
 
-def main():
-    img3 = Image.open("nota-fiscal.jpeg")
-    text3 = pt.image_to_string(img3, lang='por')
+filename = "sample.bmp"
+image = np.array(Image.open(filename))
+text = pytesseract.image_to_string(image)
 
-    pattern = re.compile("VALOR: (\d+),(\d+)")
-    match = pattern.findall(text3)
-
-    print(",".join(match[0]))
-
-if __name__ == "__main__":
-    main()
+print(text)
